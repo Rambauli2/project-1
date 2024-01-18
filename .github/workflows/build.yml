@@ -1,4 +1,3 @@
-
 name: CI
 on:
   push:
@@ -9,16 +8,17 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2  
-         used to cache dependencies with a timeout
+      - uses: actions/checkout@v2
+
+          used to cache dependencies with a timeout
       - name: Get Date
         id: get-date
         run: |
           echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
         shell: bash
 
-      - name: Checkout Repository
-  uses: actions/checkout@v2
+      - name: Cache Buildozer global directory
+        uses: actions/cache@v2
         with:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
